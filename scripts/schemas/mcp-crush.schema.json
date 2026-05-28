@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "mcp-crush.schema.json",
+  "title": "Crush CLI MCP Configuration",
+  "description": "Schema for Crush CLI MCP server configuration files",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "mcp": {
+      "type": "object",
+      "description": "Map of MCP server configurations",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Stdio server configuration",
+            "required": ["type", "command"],
+            "properties": {
+              "type": {
+                "const": "stdio",
+                "description": "Transport type"
+              },
+              "command": {
+                "type": "string",
+                "description": "Command to execute"
+              },
+              "args": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Arguments passed to the command"
+              },
+              "env": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "Environment variables for the server process"
+              },
+              "timeout": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Server timeout in seconds"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              },
+              "disabled_tools": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "List of disabled tool names"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "HTTP/SSE server configuration",
+            "required": ["type", "url"],
+            "properties": {
+              "type": {
+                "enum": ["http", "sse"],
+                "description": "Transport type"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL of the MCP server endpoint"
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "HTTP headers for authentication"
+              },
+              "timeout": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Server timeout in seconds"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              },
+              "disabled_tools": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "List of disabled tool names"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "mcp-vscode.schema.json",
+  "title": "VSCode MCP Configuration",
+  "description": "Schema for VSCode native MCP configuration (.vscode/mcp.json)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "servers": {
+      "type": "object",
+      "description": "Map of MCP server configurations",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Stdio server configuration",
+            "required": ["type", "command"],
+            "properties": {
+              "type": {
+                "const": "stdio",
+                "description": "Server transport type"
+              },
+              "command": {
+                "type": "string",
+                "description": "Command to execute"
+              },
+              "args": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Command arguments"
+              },
+              "env": {
+                "type": "object",
+                "additionalProperties": {
+                  "oneOf": [
+                    { "type": "string" },
+                    { "type": "number" }
+                  ]
+                },
+                "description": "Environment variables"
+              },
+              "envFile": {
+                "type": "string",
+                "description": "Path to .env file"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "HTTP/SSE server configuration",
+            "required": ["type", "url"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["http", "sse"],
+                "description": "Transport type"
+              },
+              "url": {
+                "type": "string",
+                "description": "Server URL"
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "HTTP headers"
+              },
+              "auth": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "Structured auth metadata for OAuth-capable remote MCP providers"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "description": "Input variables for sensitive data",
+      "items": {
+        "type": "object",
+        "required": ["type", "id", "description"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["promptString", "pickString", "command"]
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]+$"
+          },
+          "description": { "type": "string" },
+          "password": { "type": "boolean" },
+          "default": { "type": "string" }
+        }
+      }
+    }
+  }
+}

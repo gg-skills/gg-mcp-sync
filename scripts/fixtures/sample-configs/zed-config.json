@@ -1,0 +1,11 @@
+{
+  "context_servers": {
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-test-key-12345"
+      }
+    }
+  }
+}

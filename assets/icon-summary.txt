@@ -1,0 +1,14 @@
+**The Four Questions**
+
+1. Verb: deploy
+2. Object: a switchboard that lights up different panels depending on which editor is in the room
+3. Animal: a chameleon that changes its colors based on whatever surface it lands on, because this tool refuses to pick one editor and sticks its tongue at whatever codebase it's currently touching
+4. Most annoying manual task: walking into every config file your editor has ever touched, checking which MCP servers need which secrets, and manually pasting the right environment variables into the right slots like a very obedient but extremely literal janitor
+
+**The Reality**
+
+This skill is basically a middleman with a clipboard and a bad attitude. It shows up to your project, asks every MCP service "what do you need?", writes those secrets down in a little `.mcp-sync/` folder, and then marches around to your editor's config files like a tiny general deploying troops. It doesn't care which editor you use — it'll write for all of them if you ask nicely. It keeps secrets in the target project like a squirrel hiding acorns, because apparently it learned about security from a home renovation show. Run `mcp-sync setup`, answer some questions, fill in some secrets, and watch it do all the boring config writing while you go get coffee.
+
+**The Superpower and the Mockery**
+
+This tool thinks it's a wizard but it's really just a very organized secretary with a checklist. It will hunt down every enabled MCP service, gather every required environment variable, translate that into editor-specific config format, and slap it into the right file faster than you can say "which config file was I even using?" It has no idea if your editor will actually understand what it wrote — it just knows the file now exists. It is notoriously picky about where you run it from, will throw a tantrum if you forget to set the right environment variable, and will happily overwrite your configs while leaving a backup folder "just in case" you scream at it later.

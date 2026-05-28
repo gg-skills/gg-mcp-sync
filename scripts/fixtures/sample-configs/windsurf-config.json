@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "playwright-stdio": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-playwright"]
+    },
+    "puppeteer-stdio": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-puppeteer"]
+    }
+  }
+}

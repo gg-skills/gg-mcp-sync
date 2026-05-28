@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "firecrawl-stdio": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-test-key-12345"
+      }
+    },
+    "mongodb-stdio": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-mongo"],
+      "env": {
+        "MONGODB_CONNECTION_STRING": "mongodb://localhost:27020/test_db"
+      }
+    }
+  }
+}

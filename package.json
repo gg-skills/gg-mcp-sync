@@ -1,0 +1,45 @@
+{
+  "name": "mcp-sync",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mcp-sync": "./scripts/mcp-sync.ts"
+  },
+  "scripts": {
+    "mcp:setup": "tsx scripts/setup.ts",
+    "mcp:manage-env": "tsx scripts/manage-env.ts",
+    "mcp:manage-servers": "tsx scripts/manage-servers.ts",
+    "mcp:manage-editors": "tsx scripts/manage-editors.ts",
+    "mcp:apply": "tsx scripts/apply-config.ts",
+    "mcp:backup": "tsx scripts/backup-configs.ts",
+    "mcp:validate": "tsx scripts/validate-configs.ts",
+    "mcp:cli:ink": "bun run ./scripts/ui/cli-ink/index.mts",
+    "mcp:cli:opentui": "bun run ./scripts/ui/cli-opentui/main.tsx",
+    "mcp:cli:interactive": "tsx scripts/ui/cli-interactive/main.ts",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest --config jest.config.ts",
+    "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --config jest.config.ts --watch"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.2.1",
+    "@opentui/core": "^0.1.90",
+    "@opentui/react": "^0.1.90",
+    "ajv": "^8.17.1",
+    "dotenv": "^17.3.1",
+    "ink": "^6.8.0",
+    "js-yaml": "^4.1.0",
+    "jsonc-parser": "^3.3.1",
+    "react": "^19.2.0",
+    "smol-toml": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.10.13",
+    "ink-testing-library": "^4.0.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.3"
+  }
+}

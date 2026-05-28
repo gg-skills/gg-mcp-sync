@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "mcp-standard.schema.json",
+  "title": "MCP Standard Configuration",
+  "description": "Schema for MCP server configuration files used by Claude Code, Cursor, Windsurf, and others",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "mcpServers": {
+      "type": "object",
+      "description": "Map of MCP server configurations",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Stdio server configuration",
+            "required": ["command"],
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "Command to execute (e.g., 'npx', 'node', 'python')"
+              },
+              "args": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Arguments passed to the command"
+              },
+              "env": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "Environment variables for the server process"
+              },
+              "cwd": {
+                "type": "string",
+                "description": "Working directory for the process"
+              },
+              "type": {
+                "type": "string",
+                "description": "Optional transport type hint"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "HTTP/SSE server configuration",
+            "required": ["type", "url"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["http", "sse"],
+                "description": "Transport type: 'http' for HTTP streaming, 'sse' for Server-Sent Events"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL of the MCP server endpoint"
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "HTTP headers for authentication"
+              },
+              "auth": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "Structured auth metadata for OAuth-capable remote MCP providers"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  }
+}

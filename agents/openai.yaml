@@ -1,0 +1,7 @@
+interface:
+  display_name: GG → Mcp Sync → MCP Sync
+  short_description: Manage reusable MCP service and editor configuration sync across projects.
+  default_prompt: Use mcp-sync/SKILL.md when installing, running, debugging, extending, or migrating existing MCP configs into the reusable MCP Sync toolkit and its .mcp-sync runtime storage.
+  brand_color: '#6366f1'
+  icon_large: ./assets/icon-large.png
+  icon_small: ./assets/icon-small.svg

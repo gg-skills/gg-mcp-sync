@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "mcp-trae.schema.json",
+  "title": "Trae CLI MCP Configuration",
+  "description": "Schema for Trae CLI MCP server configuration (YAML with mcp_servers key)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "mcp_servers": {
+      "type": "object",
+      "description": "Map of MCP server configurations",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Stdio server configuration",
+            "required": ["command"],
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "Command to execute"
+              },
+              "args": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Arguments passed to the command"
+              },
+              "env": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "Environment variables for the server process"
+              },
+              "type": {
+                "type": "string",
+                "description": "Optional transport type hint"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              }
+            },
+            "additionalProperties": true
+          },
+          {
+            "type": "object",
+            "description": "HTTP/SSE server configuration",
+            "required": ["url"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["http", "sse"],
+                "description": "Transport type"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL of the MCP server endpoint"
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "HTTP headers for authentication"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Whether the server is disabled"
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    }
+  }
+}

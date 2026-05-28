@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "enabledServers": ["firecrawl-stdio", "mongodb-stdio", "playwright-stdio"],
+  "serverSettings": {},
+  "envVars": {
+    "MCP_FIRECRAWL_API_KEY": {
+      "isSet": true,
+      "lastValidated": "2024-01-27T10:00:00.000Z"
+    },
+    "MCP_MONGODB_CONNECTION_STRING": {
+      "isSet": true,
+      "lastValidated": "2024-01-27T10:00:00.000Z"
+    }
+  },
+  "editors": {
+    "cursor": {
+      "project": {
+        "enabled": true,
+        "configPath": "/Users/testuser/projects/test-project/.cursor/mcp.json",
+        "lastSync": "2024-01-27T10:00:00.000Z",
+        "lastBackup": null
+      },
+      "global": {
+        "enabled": false,
+        "configPath": "/Users/testuser/.cursor/mcp.json",
+        "lastSync": null,
+        "lastBackup": null
+      }
+    },
+    "windsurf": {
+      "project": {
+        "enabled": true,
+        "configPath": "/Users/testuser/projects/test-project/.windsurf/mcp.json",
+        "lastSync": "2024-01-27T09:30:00.000Z",
+        "lastBackup": null
+      },
+      "global": {
+        "enabled": true,
+        "configPath": "/Users/testuser/.windsurf/mcp.json",
+        "lastSync": "2024-01-27T09:30:00.000Z",
+        "lastBackup": "2024-01-27T09:30:00.000Z"
+      }
+    }
+  },
+  "lastModified": "2024-01-27T10:00:00.000Z",
+  "lastModifiedBy": "setup"
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "mcp-opencode.schema.json",
+  "title": "OpenCode MCP Configuration",
+  "description": "Schema for OpenCode CLI configuration (opencode.json)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "mcp": {
+      "type": "object",
+      "description": "Map of MCP server configurations keyed by server id",
+      "propertyNames": {
+        "not": {
+          "const": "servers"
+        }
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Local (stdio) server configuration",
+            "required": ["type", "command"],
+            "properties": {
+              "type": {
+                "const": "local",
+                "description": "Local server (stdio transport)"
+              },
+              "command": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Command and arguments as array"
+              },
+              "environment": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "Environment variables"
+              },
+              "enabled": {
+                "type": "boolean",
+                "default": true,
+                "description": "Enable or disable the server"
+              },
+              "timeout": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Timeout in milliseconds"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "Remote (HTTP/SSE) server configuration",
+            "required": ["type", "url"],
+            "properties": {
+              "type": {
+                "const": "remote",
+                "description": "Remote server (HTTP/SSE transport)"
+              },
+              "url": {
+                "type": "string",
+                "description": "Server URL"
+              },
+              "headers": {
+                "type": "object",
+                "additionalProperties": { "type": "string" },
+                "description": "HTTP headers"
+              },
+              "enabled": {
+                "type": "boolean",
+                "default": true,
+                "description": "Enable or disable the server"
+              },
+              "timeout": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Timeout in milliseconds"
+              },
+              "oauth": {
+                "oneOf": [
+                  { "type": "boolean", "const": false },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "clientId": { "type": "string" },
+                      "clientSecret": { "type": "string" },
+                      "scope": { "type": "string" }
+                    }
+                  }
+                ],
+                "description": "OAuth configuration or false to disable"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  }
+}
